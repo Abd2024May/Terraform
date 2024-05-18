@@ -68,13 +68,20 @@ sysctl -p /etc/sysctl.conf
 
 # Install kubectl, kubelet and kubeadm
 echo "-------------Installing Kubectl, Kubelet and Kubeadm-------------"
-apt-get update && sudo apt-get install -y apt-transport-https curl
-curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+REPO_URL="https://pkgs.k8s.io/core:/stable:/v1.28/deb/"
+KEY_URL="https://pkgs.k8s.io/core:/stable:/v1.28/deb/Release.key"
+KEYRING_PATH="/etc/apt/keyrings/kubernetes-apt-keyring.gpg"
+SOURCE_LIST_PATH="/etc/apt/sources.list.d/kubernetes.list"
 
-cat <<EOF | sudo tee /etc/apt/sources.list.d/kubernetes.list
-deb https://apt.kubernetes.io/ kubernetes-xenial main
-EOF
+# Create the keyrings directory if it does not exist
+sudo mkdir -p /etc/apt/keyrings
 
+# Get the key and save it to the specified location
+curl -fsSL $KEY_URL | sudo gpg --dearmor -o $KEYRING_PATH
+
+# Add the repository to the sources list
+echo "deb [signed-by=$KEYRING_PATH] $REPO_URL /" | sudo tee $SOURCE_LIST_PATH > /dev/null
+# Update package lists
 apt update -y
 apt install -y kubelet kubeadm kubectl
 apt-mark hold kubelet kubeadm kubectl
