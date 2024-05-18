@@ -40,6 +40,7 @@ AWS subscription
    
 ## Deployment Instructions
 ### Change the directory to cloned git repository
+### chmod 400 k8s
 ### run terraform init
 ### run terraform apply -auto-approve 
 
