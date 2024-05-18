@@ -20,6 +20,7 @@ resource "aws_instance" "k8s_master" {
   }
   provisioner "remote-exec" {
     inline = [
+      "chmod 400",
       "chmod +x /home/ubuntu/master.sh",
       "sudo sh /home/ubuntu/master.sh k8s-master"
     ]
@@ -56,6 +57,7 @@ resource "aws_instance" "k8s_worker" {
   }
   provisioner "remote-exec" {
     inline = [
+      "chmod 400",
       "chmod +x /home/ubuntu/worker.sh",
       "sudo sh /home/ubuntu/worker.sh k8s-worker-${count.index}",
       "sudo sh /home/ubuntu/join-command.sh"
