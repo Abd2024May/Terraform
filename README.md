@@ -38,20 +38,24 @@ AWS subscription
     sudo yum-config-manager --add-repo https://rpm.releases.hashicorp.com/AmazonLinux/hashicorp.repo
     sudo yum -y install terraform
    
-## Deployment Instructions
+## Deployment environment Instructions
 ### Change the directory to cloned git repository
 ### chmod 400 k8s
 ### run terraform init
 ### run terraform apply -auto-approve 
 
-## Verify the environment
+## Deployment application Instructions
 
 Once deployment is finished we will get the Master and Workers puplic IPs
 login to the Master node using the private key (k8s) which is avaialable in the repository
    
     ssh -i k8s ubuntu@MasterIP
     sudo su
-    kubectl get nodes
+    kubectl apply -f deployment-service.yaml
+    
+## Verify the deployment
+    kubectl get pods
+    http://NodeIP:32000
 
 
 ## Clean the environment
