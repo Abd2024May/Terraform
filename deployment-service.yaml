@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: burgan
+  labels:
+    app.kubernetes.io/name: burgan
+  name: burgan
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: burgan
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: burgan
+    spec:
+      containers:
+      - image: abedelhafez/tmdb-devops-challenge:96
+        name: burgan
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: burgan
+  labels:
+    app.kubernetes.io/name: burgan
+spec:
+  selector:
+    app.kubernetes.io/name: burgan
+  ports:
+  - name: http
+    port: 3000
+    protocol: TCP
+    targetPort: 3000
+  type: ClusterIP
+
