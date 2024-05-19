@@ -3,6 +3,7 @@ AWS subscription
 
 ## Preperation Instructions
 
+This implementaion is for 1 Master and 1 Worker (if reuqired more that 1 worker, please change variable "worker_instance_count" in variables.tf file to the required number of workers)  
 ### Create EC2 instance
 
 ### Create IAM user
