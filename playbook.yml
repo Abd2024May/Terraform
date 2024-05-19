@@ -9,3 +9,15 @@
       dest: ./join-command.sh
       flat: yes
       validate_checksum: false
+  - name: fetch deployment-service file
+    ansible.builtin.fetch:
+      src: /home/ubuntu/deployment-service.yaml
+      dest: ./deployment-service.yaml
+      flat: yes
+      validate_checksum: false      
+  - name: fetch ingress file
+    ansible.builtin.fetch:
+      src: /home/ubuntu/ingress.yaml
+      dest: ./ingress.yaml
+      flat: yes
+      validate_checksum: false
