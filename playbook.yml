@@ -9,15 +9,3 @@
       dest: ./join-command.sh
       flat: yes
       validate_checksum: false
-  - name: fetch deployment-service file
-    ansible.builtin.fetch:
-      src: /home/ec2-user/Terraform/deployment-service.yaml 
-      dest: /home/ubuntu/deployment-service.yaml
-      flat: yes
-      validate_checksum: false      
-  - name: fetch ingress file
-    ansible.builtin.fetch:
-      src: /home/ec2-user/Terraform/ingress.yaml
-      dest: /home/ubuntu/ingress.yaml
-      flat: yes
-      validate_checksum: false
