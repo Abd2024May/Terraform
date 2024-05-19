@@ -18,6 +18,12 @@ resource "aws_instance" "k8s_master" {
     source      = "./master.sh"
     destination = "/home/ubuntu/master.sh"
   }
+
+    provisioner "file" {
+    source      = "./deployment-service.yaml"
+    destination = "/home/ubuntu/deployment-service.yaml"
+  }
+
   provisioner "remote-exec" {
     inline = [
       "chmod +x /home/ubuntu/master.sh",
